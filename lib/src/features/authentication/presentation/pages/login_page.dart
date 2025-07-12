@@ -1,5 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:watchyourhealth/src/presentation/widget/language_selector.dart';
+import 'package:watchyourhealth/src/features/homepage/presentation/pages/homepage.dart';
 
 class AllyCareLoginScreen extends StatelessWidget {
   const AllyCareLoginScreen({super.key});
@@ -20,7 +21,9 @@ class AllyCareLoginScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(6.0),
+                      ),
                       border: Border.all(width: 0.7, color: Colors.grey),
                     ),
                     padding: EdgeInsetsGeometry.all(4),
@@ -30,7 +33,9 @@ class AllyCareLoginScreen extends StatelessWidget {
                         Container(
                           width: 20,
                           height: 20,
-                          decoration: const BoxDecoration(shape: BoxShape.circle),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
                           child: ClipOval(
                             child: Image.asset(
                               'assets/images/uk_flag.png',
@@ -68,7 +73,7 @@ class AllyCareLoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              const SizedBox(width: 24),
+                const SizedBox(width: 24),
               ],
             ),
             // Main Content
@@ -86,8 +91,8 @@ class AllyCareLoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(24),
                   child: Column(
                     children: [
-                      const SizedBox(height: 40),
-                      // Logo
+                      const SizedBox(height: 64),
+                      // AllyCare Logo
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -107,7 +112,7 @@ class AllyCareLoginScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 18),
                       // Subtitle
                       const Text(
                         'Login or create your account',
@@ -117,29 +122,31 @@ class AllyCareLoginScreen extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      const SizedBox(height: 60),
+                      const SizedBox(height: 64),
                       // Email Input
                       Container(
                         decoration: BoxDecoration(
                           color: const Color(0xFFF8F9FA),
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: const Color(0xFFE9ECEF),
-                            width: 1,
+                            width: 1.9,
                           ),
                         ),
                         child: const TextField(
                           decoration: InputDecoration(
                             hintText: 'Enter your email',
                             hintStyle: TextStyle(
-                              color: Colors.black38,
+                              color: Colors.black,
                               fontSize: 16,
                             ),
                             prefixIcon: Icon(
                               Icons.mail,
-                              color: Colors.black54,
+                              color: Colors.black,
                               size: 20,
                             ),
+                            fillColor: Colors.white,
+                            filled: true,
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 16,
@@ -155,10 +162,15 @@ class AllyCareLoginScreen extends StatelessWidget {
                         width: 190,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Handle continue action
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => const Homepage(),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4A90E2),
+                            backgroundColor: const Color(0xFF255FD5),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
@@ -200,23 +212,14 @@ class AllyCareLoginScreen extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  // Wave Effect
                   Positioned(
                     top: 0,
                     left: 0,
                     right: 0,
-                    child: Container(
-                      height: 50,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.elliptical(200, 50),
-                          bottomRight: Radius.elliptical(200, 50),
-                        ),
-                      ),
+                    child: Image.asset(
+                      'assets/images/loginbottom_removebg.png',
                     ),
                   ),
-                  // Support Button
                   Positioned(
                     bottom: 40,
                     left: 0,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:watchyourhealth/firebase_options.dart';
 
-import 'src/presentation/screens/login/login_screen.dart';
+import 'src/features/authentication/presentation/pages/login_page.dart';
 
 void main() async {
   // Ensure that plugin services are initialized before running the app.
