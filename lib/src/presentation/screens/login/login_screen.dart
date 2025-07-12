@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:watchyourhealth/src/presentation/widget/language_selector.dart';
 
 class AllyCareLoginScreen extends StatelessWidget {
-  const AllyCareLoginScreen({Key? key}) : super(key: key);
+  const AllyCareLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,67 +11,65 @@ class AllyCareLoginScreen extends StatelessWidget {
         bottom: false,
         child: Column(
           children: [
-            // App Bar
-            Container(
-              width: 110,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  width: 1,
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              alignment: Alignment.centerRight,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 24,
-                        height: 24,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        child: ClipOval(
-                          child: Image.asset(
-                            'assets/images/uk_flag.png',
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.red,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.flag,
-                                  color: Colors.white,
-                                  size: 12,
-                                ),
-                              );
-                            },
+            // Language Bar
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                      border: Border.all(width: 0.7, color: Colors.grey),
+                    ),
+                    padding: EdgeInsetsGeometry.all(4),
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 20,
+                          height: 20,
+                          decoration: const BoxDecoration(shape: BoxShape.circle),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/images/uk_flag.png',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.flag,
+                                    color: Colors.white,
+                                    size: 12,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 4),
-                      const Text(
-                        'Eng',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87,
+                        const SizedBox(width: 4),
+                        const Text(
+                          'Eng',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black87,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 4),
-                      const Icon(
-                        Icons.chevron_right,
-                        color: Colors.black54,
-                        size: 20,
-                      ),
-                    ],
+                        const Icon(
+                          Icons.chevron_right,
+                          color: Colors.black54,
+                          size: 20,
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
+                ),
+              const SizedBox(width: 24),
+              ],
             ),
             // Main Content
             Expanded(
@@ -228,9 +227,17 @@ class AllyCareLoginScreen extends StatelessWidget {
                         Container(
                           width: 22,
                           height: 22,
-                          child: Image.asset('assets/logo/support.png', fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
-                            return const Icon(Icons.support_agent, color: Colors.blue, size: 20);
-                          }),
+                          child: Image.asset(
+                            'assets/logo/support.png',
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Icon(
+                                Icons.support_agent,
+                                color: Colors.blue,
+                                size: 20,
+                              );
+                            },
+                          ),
                         ),
                         const SizedBox(width: 12),
                         const Text(
