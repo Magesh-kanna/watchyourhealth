@@ -1,17 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:watchyourhealth/src/features/homepage/data/assessment_model.dart';
-//
-// class AssessmentDetailPage extends StatelessWidget {
-//   const AssessmentDetailPage({super.key, required this.assessment});
-//
-//   final Assessment assessment;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(body: Text('AssessmentDetailsPage'));
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:watchyourhealth/src/features/homepage/data/assessment_model.dart';

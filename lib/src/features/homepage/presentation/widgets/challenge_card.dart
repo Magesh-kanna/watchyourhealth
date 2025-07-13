@@ -9,8 +9,8 @@ class ChallengeCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFFC6F0E4),
-        borderRadius: BorderRadius.circular(12),
+        color: const Color(0xFFC1EAD1),
+        borderRadius: BorderRadius.circular(21),
       ),
       child: Row(
         children: [
@@ -26,7 +26,7 @@ class ChallengeCard extends StatelessWidget {
                     "Today's Challenge!",
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.teal[900],
                     ),
                   ),
@@ -44,7 +44,7 @@ class ChallengeCard extends StatelessWidget {
                       'Push Up 20x',
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 14,
+                        fontSize: 12,
                         color: Colors.white,
                       ),
                     ),
@@ -54,11 +54,11 @@ class ChallengeCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: LinearProgressIndicator(
-                      minHeight: 14,
+                      minHeight: 10,
                       value: 0.5,
                       backgroundColor: Colors.white,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.pinkAccent,
+                        Color(0xFFFF88A5),
                       ),
                     ),
                   ),
@@ -70,7 +70,7 @@ class ChallengeCard extends StatelessWidget {
                           text: '10',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w700,
-                            fontSize: 14,
+                            fontSize: 10,
                             color: Colors.black,
                           ),
                         ),
@@ -78,7 +78,7 @@ class ChallengeCard extends StatelessWidget {
                           text: '/20 Complete',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 10,
                             color: Colors.black87,
                           ),
                         ),
@@ -88,17 +88,17 @@ class ChallengeCard extends StatelessWidget {
                   const SizedBox(height: 12),
                   ElevatedButton.icon(
                     onPressed: () {},
-                    icon: const Icon(Icons.play_circle_fill_rounded, size: 24),
+                    icon: const Icon(Icons.play_circle_fill_rounded, size: 22),
                     label: Text(
                       "Continue",
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      foregroundColor: Colors.blue[700],
+                      foregroundColor: Color(0xFF255FD5),
                       padding: const EdgeInsets.symmetric(
                         vertical: 8,
                         horizontal: 20,
@@ -113,15 +113,17 @@ class ChallengeCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 12),
           // Right Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              "assets/images/ladypushup.png",
-              width: 120,
-              height: 120,
-              fit: BoxFit.cover,
+          Expanded(
+            flex: 3,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                "assets/images/ladypushup.png",
+                width: 120,
+                height: 120,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
         ],
