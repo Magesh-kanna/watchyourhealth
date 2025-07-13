@@ -66,6 +66,8 @@ UI fully matches Figma: spacing, typography, colors, responsiveness.
 
 ### Login Screen
 
+<img src="./assets/screenshots/9.png" alt="Login Page" width="300"/>
+
 ![Login Page](./assets/screenshots/9.png)
 ![Language Selector](./assets/screenshots/10.png)
 ![Login Credentials Missing](./assets/screenshots/11.png)
