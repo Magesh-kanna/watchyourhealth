@@ -66,35 +66,33 @@ UI fully matches Figma: spacing, typography, colors, responsiveness.
 
 ### Login Screen
 
-<img src="./assets/screenshots/9.png" alt="Login Page" width="300"/>
-
-![Login Page](./assets/screenshots/9.png)
-![Language Selector](./assets/screenshots/10.png)
-![Login Credentials Missing](./assets/screenshots/11.png)
-![Login Failed](./assets/screenshots/12.png)
+<img src="./assets/screenshots/9.png" alt="Login Page" width="280"/>
+<img src="./assets/screenshots/10.png" alt="Language Selector" width="280"/>
+<img src="./assets/screenshots/11.png" alt="Login Credentials Missing" width="280"/>
+<img src="./assets/screenshots/12.png" alt="Login Failed" width="280"/>
 
 ### Home Screen & Assessment Tab
 
-![Home Page](./assets/screenshots/1.png)
-![Challenges & Workouts Page](./assets/screenshots/2.png)
+<img src="./assets/screenshots/1.png" alt="Home Page" width="280"/>
+<img src="./assets/screenshots/2.png" alt="Challenges & Workouts Page" width="280"/>
 
 ### Appointment Tab
 
-![Appointment TabView](./assets/screenshots/3.png)
-![Appointment List Page](./assets/screenshots/4.png)
+<img src="./assets/screenshots/3.png" alt="Appointment TabView" width="280"/>
+<img src="./assets/screenshots/4.png" alt="Appointment List Page" width="280"/>
 
 ### Assessment Module
 
-![Assessment List Page](./assets/screenshots/5.png)
-![Assessment Detail Page](./assets/screenshots/6.png)
+<img src="./assets/screenshots/5.png" alt="Assessment List Page" width="280"/>
+<img src="./assets/screenshots/6.png" alt="Assessment Detail Page" width="280"/>
 
 ### Profile Screen
 
-![Profile Page](./assets/screenshots/7.png)
+<img src="./assets/screenshots/7.png" alt="Profile Page" width="280"/>
 
 ### Logout dialog
 
-![Logout](./assets/screenshots/8.png)
+<img src="./assets/screenshots/8.png" alt="Logout" width="280"/>
 
 ## Technical Decisions
 
