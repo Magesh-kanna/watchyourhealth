@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:watchyourhealth/src/features/assessment/presentation/assessment_detail_page.dart';
+import 'package:watchyourhealth/src/features/assessment/presentation/providers/assessment_list_provider.dart';
 
 class ChallengeCard extends StatelessWidget {
   const ChallengeCard({super.key});
@@ -86,28 +90,50 @@ class ChallengeCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.play_circle_fill_rounded, size: 22),
-                    label: Text(
-                      "Continue",
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Color(0xFF255FD5),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 20,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      elevation: 0,
-                    ),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final assessments =
+                          ref.read(assessmentListProvider).value?.assessments ??
+                          [];
+
+                      return ElevatedButton.icon(
+                        onPressed: () {
+                          if (assessments.isNotEmpty) {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => AssessmentDetailPage(
+                                  assessment: assessments[0],
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.play_circle_fill_rounded,
+                          size: 22,
+                        ),
+                        label: Text(
+                          "Continue",
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Color(0xFF255FD5),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 20,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          elevation: 0,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -123,6 +149,7 @@ class ChallengeCard extends StatelessWidget {
                 width: 120,
                 height: 120,
                 fit: BoxFit.fitWidth,
+                errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
               ),
             ),
           ),

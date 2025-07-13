@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCsw-H1UP3Z70dVpoaLC20C5bBNXSBhYdA',
-    appId: '1:350846527974:android:1b380f98135438c9dbce27',
+    appId: '1:350846527974:android:eaba5b457e5a703edbce27',
     messagingSenderId: '350846527974',
     projectId: 'watch-your-health-4ae97',
     storageBucket: 'watch-your-health-4ae97.firebasestorage.app',
@@ -65,11 +65,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCWdbM5fxlENf-01csNlFiUtJs7aB5PLJ4',
-    appId: '1:350846527974:ios:e179192788a055c3dbce27',
+    appId: '1:350846527974:ios:c72af4d12db62d7bdbce27',
     messagingSenderId: '350846527974',
     projectId: 'watch-your-health-4ae97',
     storageBucket: 'watch-your-health-4ae97.firebasestorage.app',
-    iosBundleId: 'com.magesh.watchyourhealth.watchyourhealth',
+    iosBundleId: 'com.magesh.watchyourhealth',
   );
 
 }

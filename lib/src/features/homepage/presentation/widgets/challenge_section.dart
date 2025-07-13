@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:watchyourhealth/src/core/utils/slide_animations.dart';
+import 'package:watchyourhealth/src/features/assessment/presentation/assessment_detail_page.dart';
+import 'package:watchyourhealth/src/features/assessment/presentation/providers/assessment_list_provider.dart';
 import 'package:watchyourhealth/src/features/homepage/presentation/widgets/challenge_card.dart';
 import 'package:watchyourhealth/src/features/homepage/presentation/widgets/circular_arrow_button.dart';
 
-class ChallengeSection extends StatefulWidget {
+class ChallengeSection extends ConsumerWidget {
   const ChallengeSection({super.key});
 
   @override
-  State<ChallengeSection> createState() => _ChallengeSectionState();
-}
-
-class _ChallengeSectionState extends State<ChallengeSection> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final assessments =
+        ref.read(assessmentListProvider).value?.assessments ?? [];
     return SlideAnimation(
       child: Column(
         children: [
@@ -30,14 +29,15 @@ class _ChallengeSectionState extends State<ChallengeSection> {
                 const SizedBox(width: 12),
                 CircularArrowButton(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   CupertinoPageRoute(
-                    //     builder: (context) => AssessmentDetailPage(
-                    //       assessment: assessments[0],
-                    //     ),
-                    //   ),
-                    // );
+                    if (assessments.isNotEmpty) {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) =>
+                              AssessmentDetailPage(assessment: assessments[0]),
+                        ),
+                      );
+                    }
                   },
                 ),
               ],

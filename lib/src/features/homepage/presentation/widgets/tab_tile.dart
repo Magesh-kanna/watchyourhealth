@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:watchyourhealth/src/core/utils/app_colors.dart';
 
 class TabTile extends StatelessWidget {
   final String title;
@@ -35,7 +36,9 @@ class TabTile extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
-                color: isSelected ? Colors.blue[700] : Colors.grey[700],
+                color: isSelected
+                    ? AppColors.wakeYourHealthPrimary
+                    : Colors.grey[700],
               ),
             ),
           ),
