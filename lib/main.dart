@@ -6,7 +6,6 @@ import 'package:watchyourhealth/firebase_options.dart';
 import 'src/features/authentication/presentation/pages/login_page.dart';
 
 void main() async {
-  // Ensure that plugin services are initialized before running the app.
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
@@ -23,15 +22,13 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-         textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         // Optional: you can also override primary styles here
         primaryTextTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).primaryTextTheme,

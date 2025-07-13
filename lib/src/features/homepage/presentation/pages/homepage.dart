@@ -99,7 +99,7 @@ class _HomepageState extends State<Homepage> {
                           style: GoogleFonts.poppins(
                             fontSize: 28,
                             fontWeight: FontWeight.w600,
-                            color: Colors.blue[700],
+                            color: Color(0xFF255FD5),
                           ),
                         ),
                         Container(
