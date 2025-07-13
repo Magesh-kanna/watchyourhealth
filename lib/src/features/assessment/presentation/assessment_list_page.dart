@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:watchyourhealth/src/core/utils/app_colors.dart';
 import 'package:watchyourhealth/src/core/utils/custom_shimmer.dart';
 import 'package:watchyourhealth/src/core/utils/custom_snackbar.dart';
+import 'package:watchyourhealth/src/features/assessment/data/assessment_list_state.dart';
 import 'package:watchyourhealth/src/features/assessment/data/assessment_model.dart';
 import 'package:watchyourhealth/src/features/assessment/presentation/assessment_detail_page.dart';
 import 'package:watchyourhealth/src/features/assessment/presentation/providers/assessment_list_provider.dart';
@@ -27,17 +27,25 @@ class _AssessmentListPageState extends ConsumerState<AssessmentListPage> {
     _scrollController.addListener(_onScroll);
   }
 
+  void _onScroll() {
+    final state =
+        ref.read(assessmentListProvider).value ?? AssessmentListState();
+    final notifier = ref.read(assessmentListProvider.notifier);
+
+    // Load more when scrolled to bottom and not already loading more
+    if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 300 &&
+        state is AsyncData &&
+        !(state).isLoadingMore &&
+        state.hasMore) {
+      notifier.loadMoreData();
+    }
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 200) {
-      ref.read(assessmentListProvider.notifier).loadMoreData();
-    }
   }
 
   void _showErrorSnackBar(String message) {
@@ -47,6 +55,10 @@ class _AssessmentListPageState extends ConsumerState<AssessmentListPage> {
           'Something went wrong while login, Please try again after some time',
     );
   }
+
+  final ScrollPhysics combinedPhysics = const ClampingScrollPhysics().applyTo(
+    const AlwaysScrollableScrollPhysics(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -81,63 +93,35 @@ class _AssessmentListPageState extends ConsumerState<AssessmentListPage> {
                 ],
               ),
 
+              // Body
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.9,
                 child: assessmentListState.when(
-                  data: (assessmentListState) {
-                    print(
-                      "assessmentListState.assessments.length ${assessmentListState.assessments.length}",
-                    );
-                    print(
-                      "assessmentListState.isLoading ${assessmentListState.isLoading}",
-                    );
-                    print(
-                      "assessmentListState.isLoadingMore ${assessmentListState.isLoadingMore}",
-                    );
-                    print(
-                      "assessmentListState.hasMore ${assessmentListState.hasMore}",
-                    );
-                    print(
-                      "${assessmentListState.lastDocument} assessmentListState.lastDocument",
-                    );
-                    if (assessmentListState.error != null) {
+                  loading: () => ShimmerListPage(),
+                  error: (err, stack) => Center(child: Text('Oops!')),
+                  data: (state) {
+                    if (state.error != null) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-                        _showErrorSnackBar(assessmentListState.error!);
+                        _showErrorSnackBar(state.error!);
                       });
                     }
 
-                    if (assessmentListState.isLoading) {
-                      return ShimmerListPage();
-                    } else {
-                      return RefreshIndicator(
-                        onRefresh: () =>
-                            ref.read(assessmentListProvider.notifier).refresh(),
-                        child: ListView.builder(
-                          controller: _scrollController,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0,
-                            vertical: 12.0,
-                          ),
-                          itemCount:
-                              assessmentListState.assessments.length +
-                              (assessmentListState.hasMore ? 1 : 0),
-                          itemBuilder: (context, index) {
-                            // Show loading indicator at the bottom when loading more
-                            if (index ==
-                                assessmentListState.assessments.length) {
-                              return assessmentListState.isLoadingMore
-                                  ? const Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: Center(
-                                        child: CircularProgressIndicator(),
-                                      ),
-                                    )
-                                  : const SizedBox.shrink();
-                            }
-
-                            final assessment =
-                                assessmentListState.assessments[index];
+                    return RefreshIndicator(
+                      onRefresh: () =>
+                          ref.read(assessmentListProvider.notifier).refresh(),
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        physics: combinedPhysics,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 12.0,
+                        ),
+                        itemCount:
+                            state.assessments.length +
+                            (state.isLoadingMore ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index < state.assessments.length) {
+                            final assessment = state.assessments[index];
                             return Padding(
                               padding: const EdgeInsets.only(top: 12.0),
                               child: AssessmentCard(
@@ -145,7 +129,7 @@ class _AssessmentListPageState extends ConsumerState<AssessmentListPage> {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    CupertinoPageRoute(
+                                    MaterialPageRoute(
                                       builder: (context) =>
                                           AssessmentDetailPage(
                                             assessment: assessment,
@@ -155,44 +139,20 @@ class _AssessmentListPageState extends ConsumerState<AssessmentListPage> {
                                 },
                               ),
                             );
-                          },
-                        ),
-                      );
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24.0,
-                          vertical: 12.0,
-                        ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemCount: widget.assessments.length,
-                          itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: AssessmentCard(
-                              assessment: widget.assessments[index],
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) => AssessmentDetailPage(
-                                      assessment: widget.assessments[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      );
-                    }
+                          } else {
+                            // Show loader while loading more
+                            return const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          }
+                        },
+                      ),
+                    );
                   },
-                  error: (error, stackTrace) {
-                    return Text('Oops');
-                  },
-                  loading: () => ShimmerListPage(),
                 ),
               ),
+              const SizedBox(height: 12),
             ],
           ),
         ),

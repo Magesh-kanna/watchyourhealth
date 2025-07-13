@@ -42,23 +42,26 @@ class AssessmentCard extends StatelessWidget {
                         end: Alignment.bottomRight,
                       ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
+                    child: Hero(
+                      tag: assessment.id,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                        ),
+                        child: assessment.splashImage.contains('http')
+                            ? Image.network(
+                                assessment.splashImage,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Icon(Icons.error_outline),
+                              )
+                            : Image.asset(
+                                assessment.splashImage,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Icon(Icons.error),
+                              ),
                       ),
-                      child: assessment.splashImage.contains('http')
-                          ? Image.network(
-                              assessment.splashImage,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Icon(Icons.error_outline),
-                            )
-                          : Image.asset(
-                              assessment.splashImage,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Icon(Icons.error),
-                            ),
                     ),
                   ),
                 ),

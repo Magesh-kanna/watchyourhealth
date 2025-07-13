@@ -54,14 +54,17 @@ class AssessmentList extends _$AssessmentList {
           .map((doc) => Assessment.fromFirestore(doc))
           .toList();
 
-      return AssessmentListState(
+      print('assessments -- ${assessments.length}');
+      final stateValue = AssessmentListState(
         assessments: assessments,
         isLoading: false,
-        hasMore: finalSnapshot.docs.length == _pageSize,
+        hasMore: finalSnapshot.docs.length != _pageSize,
         lastDocument: finalSnapshot.docs.isNotEmpty
             ? finalSnapshot.docs.last
             : null,
       );
+      state = AsyncValue.data(stateValue);
+      return stateValue;
     } catch (e) {
       return AssessmentListState(isLoading: false, error: e.toString());
     }
@@ -109,8 +112,9 @@ class AssessmentList extends _$AssessmentList {
   }
 
   Future<void> refresh() async {
-    state = AsyncValue.data(AssessmentListState(isLoading: true));
-    await loadInitialData();
+    await Future.delayed(const Duration(seconds: 1));
+    // state = AsyncValue.data(AssessmentListState(isLoading: true));
+    // await loadInitialData();
   }
 
   Future<void> addAssessment(Assessment assessment) async {
